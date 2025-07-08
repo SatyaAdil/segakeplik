@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sega Cokot Keplit - Warung Nasi Tradisional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ff6b35, #f7931e, #ffb347);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .logo::before {
+            content: "🍚";
+            font-size: 2.5rem;
+            filter: drop-shadow(0 2px 4px rgba(255, 107, 53, 0.3));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: glow 3s ease-in-out infinite alternate;
+            font-weight: 900;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); }
+            to { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.5); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+
+        .price-highlight {
+            background: linear-gradient(45deg, #fff, #f8f9fa);
+            color: #ff6b35;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 2rem;
+            font-weight: 900;
+            margin: 2rem 0;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            animation: bounce 2s infinite;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .whatsapp-button {
+            background: linear-gradient(45deg, #25d366, #20c157);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6);
+        }
+
+        .whatsapp-button:hover {
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Value Proposition */
+        .value-prop {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-prop::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .value-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        .value-card .icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .value-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .value-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 25px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .about-image:hover {
+            transform: translateY(-15px) scale(1.05);
+        }
+
+        .about-image .icon {
+            font-size: 6rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-image h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-image p {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            position: relative;
+        }
+
+        .menu h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .menu-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 107, 53, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+            border-color: #ff6b35;
+        }
+
+        .menu-item .icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .menu-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .menu-item p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .special-offer {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-item .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .contact-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .whatsapp-cta {
+            background: linear-gradient(45deg, #25d366, #20c157);
+            color: white;
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: inline-block;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        .whatsapp-cta:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float-element 15s infinite ease-in-out;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes float-element {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(90deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            75% { transform: translateY(-40px) rotate(270deg); }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .price-highlight {
+                font-size: 1.5rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-item {
+                padding: 2rem;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .price-highlight {
+                font-size: 1.3rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+
+            .value-card {
+                padding: 2rem;
+            }
+
+            .menu-item {
+                padding: 1.5rem;
+            }
+
+            .contact-item {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements -->
+    <div class="floating-element" style="top: 20%; left: 10%;">🍚</div>
+    <div class="floating-element" style="top: 60%; right: 15%; animation-delay: -5s;">🥄</div>
+    <div class="floating-element" style="top: 40%; left: 80%; animation-delay: -10s;">🍛</div>
+    <div class="floating-element" style="top: 70%; left: 20%; animation-delay: -7s;">🌶️</div>
+    <div class="floating-element" style="top: 30%; right: 30%; animation-delay: -12s;">🥗</div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Sega Cokot Keplik</a>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Sega Cokot Keplik</h1>
+            <p class="hero-subtitle">Warung Nasi Tradisional Premium</p>
+            <div class="price-highlight">HANYA Rp 5.000!</div>
+            <p>Nikmati cita rasa autentik nasi tradisional dengan kualitas terbaik<br>
+            <strong>Porsi kenyang, harga bersahabat, rasa tak terlupakan!</strong></p>
+            <div class="cta-buttons">
+                <a href="#menu" class="cta-button">Lihat Menu</a>
+                <a href="https://wa.me/6289520269557?text=hallo%20kak%20saya%20mau%20pesan" 
+                class="cta-button whatsapp-button" target="_blank">
+                    💬 Order via WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="value-prop">
+        <div class="container">
+            <div class="value-grid">
+                <div class="value-card">
+                    <span class="icon">💰</span>
+                    <h3>Harga Terjangkau</h3>
+                    <p>Hanya Rp 5.000 untuk porsi yang mengenyangkan dan berkualitas tinggi</p>
+                </div>
+                <div class="value-card">
+                    <span class="icon">⚡</span>
+                    <h3>Pelayanan Cepat</h3>
+                    <p>Disiapkan fresh dan disajikan dengan pelayanan yang ramah dan cepat</p>
+                </div>
+                <div class="value-card">
+                    <span class="icon">🏆</span>
+                    <h3>Kualitas Premium</h3>
+                    <p>Bahan-bahan segar pilihan dengan cita rasa otentik yang memanjakan lidah</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Tentang Kami</h2>
+                    <p>Sega Cokot Keplit hadir dengan misi memberikan pengalaman kuliner nasi tradisional yang tak terlupakan dengan harga yang sangat terjangkau. Kami percaya bahwa makanan berkualitas tidak harus mahal.</p>
+                    <p>Dengan konsep "cokot keplit" yang unik, kami menghadirkan tradisi makan yang autentik dan menyenangkan. Setiap porsi disiapkan dengan penuh cinta menggunakan resep turun-temurun yang telah terbukti.</p>
+                    <p>Komitmen kami adalah memberikan nilai terbaik untuk setiap rupiah yang Anda keluarkan. Bergabunglah dengan ribuan pelanggan yang sudah merasakan kelezatan dan kehangatan Sega Cokot Keplit.</p>
+                </div>
+                <div class="about-image">
+                    <div class="icon">🍽️</div>
+                    <h3>Tradisi & Kualitas</h3>
+                    <p>Memadukan cita rasa tradisional dengan standar kualitas modern untuk kepuasan maksimal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2>Menu Pilihan Terbaik</h2>
+            <p class="menu-subtitle">Semua dengan harga yang sangat terjangkau dan porsi yang memuaskan</p>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="icon">🍚</div>
+                    <h3>Nasi Putih Hangat</h3>
+                    <p>Nasi putih premium yang selalu fresh dengan tekstur pulen dan aroma wangi</p>
+                    <div class="price">Rp 5.000</div>
+                    <div class="special-offer">Porsi Jumbo!</div>
+                </div>
+                <div class="menu-item">
+                    <div class="icon">🍛</div>
+                    <h3>Paket Komplit</h3>
+                    <p>Nasi putih + lauk pilihan + sayuran segar + sambal khas dalam satu paket lengkap</p>
+                    <div class="price">Rp 5.000</div>
+                    <div class="special-offer">Best Seller!</div>
+                </div>
+                <div class="menu-item">
+                    <div class="icon">🥘</div>
+                    <h3>Sega Cokot Spesial</h3>
+                                        <p>Nasi khas dengan perpaduan rempah rahasia, lauk spesial, dan sambal mantap</p>
+                    <div class="price">Rp 7.000</div>
+                    <div class="special-offer">Limited Edition!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Hubungi Kami</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="icon">📍</div>
+                    <h3>Lokasi</h3>
+                    <p>Jl. Kenangan No. 123, Kota Harapan</p>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">⏰</div>
+                    <h3>Jam Buka</h3>
+                    <p>Setiap Hari: 08.00 - 21.00 WIB</p>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">📞</div>
+                    <h3>Telepon</h3>
+                    <p>0895-2026-9557</p>
+                </div>
+            </div>
+            <a href="https://wa.me/6289520269557" class="whatsapp-cta" target="_blank">💬 Pesan Sekarang via WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sega Cokot Keplit</h3>
+                    <p>Warung nasi tradisional yang memberikan pengalaman makan penuh kenangan dan rasa otentik.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Alamat</h3>
+                    <p>Jl. Kenangan No. 123<br>Kota Harapan, Indonesia</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak</h3>
+                    <p>WhatsApp: 0895-2026-9557<br>Email: segacokot@example.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Sega Cokot Keplit. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
